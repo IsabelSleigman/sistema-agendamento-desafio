@@ -135,8 +135,9 @@ namespace Sistema_Agendamento
 			Console.WriteLine("3- Editar Processo");
 			Console.WriteLine("4- Excluir Processo");
 			Console.WriteLine("5- Somar Processos");
-			Console.WriteLine("6- Calcular Média por Estados");
+			Console.WriteLine("6- Calcular Média por Estado");
 			Console.WriteLine("7- Listar Processos por Data ");
+			Console.WriteLine("8- Listar Processos por Estado ");
 			Console.WriteLine("V- Voltar");
 			Console.WriteLine();
 
@@ -180,6 +181,10 @@ namespace Sistema_Agendamento
 						ProcessoService.CalcularMediaPorEstado();
 						Console.Clear();
 						break;
+					case "8":
+						ProcessoService.ListarProcessoEstadoCliente();
+						Console.Clear();
+						break;
 					case "7":
 						ProcessoService.ListarProcessoMesAno();
 						Console.Clear();
@@ -202,6 +207,7 @@ namespace Sistema_Agendamento
 				Console.WriteLine("5- Somar Processos");
 				Console.WriteLine("6- Calcular Média por Estados");
 				Console.WriteLine("7- Listar Processos por Data ");
+				Console.WriteLine("8- Listar Processos por Estado ");
 				Console.WriteLine("V- Voltar");
 				Console.WriteLine();
 

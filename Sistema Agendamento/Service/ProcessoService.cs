@@ -217,7 +217,7 @@ namespace Sistema_Agendamento.Service
 
         public static void SomaProcessosAtivos()
         {
-            var total = processoRepository.CalcularSomaProcessosAtivos();
+            var total = processoRepository.CalcularSomaAtivos();
 
             Console.WriteLine("A soma total dos processo ativos é: \n");
 
@@ -325,7 +325,7 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
 
-            var numeroProcessos = processoRepository.ListarProcessosMesAno(mes, ano);
+            var numeroProcessos = processoRepository.ListarPorMesAno(mes, ano);
 
             if(numeroProcessos.Count > 0)
             {
@@ -335,6 +335,33 @@ namespace Sistema_Agendamento.Service
                     Console.WriteLine("");
                     Console.Write($" / Número - {item} - / ");
                 }
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Nenhum Processo encontrado!");
+
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+
+        }
+        public static void ListarProcessoEstadoCliente()
+        {
+            var processos = processoRepository.ListarPorEstadoCliente();
+
+            if (processos.Count > 0)
+            {
+                foreach (var item in processos)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine($"Empresa - {item.NomeCliente}");
+                    Console.WriteLine($"Número Processo: {item.NumeroProcesso}");
+                }
+
                 Console.WriteLine("\n\nAperte enter para voltar ao menu");
 
                 Console.ReadLine();

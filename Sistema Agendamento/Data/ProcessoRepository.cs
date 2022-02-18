@@ -115,12 +115,12 @@ namespace Sistema_Agendamento.Data
             return listaProcessos
             .Any(p => p.ProcessoId == processoId && p.Excluido != true);
         }
-        public double CalcularSomaProcessosAtivos()
+        public double CalcularSomaAtivos()
         {
             AtualizarProcessos();
 
             return listaProcessos
-                .Where(p => p.Status == StatusProcessoEnum.Ativo)
+                .Where(p => p.Status == StatusProcessoEnum.Ativo && p.Excluido != true)
                 .Select(p => p.Valor)
                 .Sum();
         }
@@ -130,7 +130,7 @@ namespace Sistema_Agendamento.Data
             AtualizarProcessos();
 
             var processosEstadoEspecifico = listaProcessos
-                .Where(p => p.ClienteId == clienteId && p.EstadoProcessoEnum == estado)
+                .Where(p => p.ClienteId == clienteId && p.EstadoProcessoEnum == estado && p.Excluido != true)
                 .Select(p => p.Valor)
                 .ToList();
 
@@ -149,14 +149,33 @@ namespace Sistema_Agendamento.Data
                 return 0;
             }
         }
-        public List<string> ListarProcessosMesAno(int mes, int ano)
+        public List<string> ListarPorMesAno(int mes, int ano)
         {
             AtualizarProcessos();
 
             return listaProcessos
-                .Where(p => p.DataInicio.Year == ano && p.DataInicio.Month == mes)
+                .Where(p => p.DataInicio.Year == ano && p.DataInicio.Month == mes && p.Excluido != true)
                 .Select(p => p.NumeroProcesso)
                 .ToList();
+        }
+        public List<Processo> ListarPorEstadoCliente()
+        {
+            AtualizarProcessos();
+
+            var listaProcesso = new List<Processo>();
+
+            var clientes = _clienteRepository.Listar();
+
+            foreach (var cliente in clientes)
+            {
+                var processosPorEstado = listaProcessos
+                .Where(p => p.EstadoProcessoEnum == cliente.EstadoClienteEnum)
+                .ToList();
+
+                listaProcesso.AddRange(processosPorEstado);
+            }
+
+            return listaProcesso;
         }
     }
 }
