@@ -90,77 +90,85 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
         }
-        public static void EditarCliente()
+        public static void EditarProcesso()
         {
             Console.WriteLine();
-            Console.Write("Digite o id do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
-            while (!(clienteRepository.VerificarClienteId(clienteId)))
+            Console.Write("Digite o id do Processo: ");
+            int processoId = int.Parse(Console.ReadLine());
+            while (!(processoRepository.VerificarProcessoId(processoId)))
             {
-                Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
-                clienteId = int.Parse(Console.ReadLine());
-            }
-            var cliente = clienteRepository.RetornaPorId(clienteId);
+                Console.Write("Processo não encontrado, digite novamente o Id do Processo: ");
+                processoId = int.Parse(Console.ReadLine());
+            };
+
+            var processo = processoRepository.RetornaPorId(processoId);
             Console.Clear();
 
-            Console.WriteLine("Deseja realmente editar esse cliente? (S/n)\n");
-            Console.WriteLine(cliente.ToString());
+            Console.WriteLine("Deseja realmente editar esse Processo? (S/n)\n");
+            Console.WriteLine(processo.ToString());
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
 
             if (opcaoUsuario == "S")
             {
-                Console.Write("Digite o nome da Empresa: ");
-                string nomeEmpresa = Console.ReadLine();
-
-                Console.Write("Digite o CNPJ: ");
-                string cnpjEmpresa = Console.ReadLine();
-
+                Console.Write("Digite o número do processo: ");
+                string numeroProcesso = Console.ReadLine();
+           
                 foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
                 {
                     Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
-                }
+                };
                 Console.Write("Digite o estado entre as opções acima: ");
-                int estadoEmpresa = int.Parse(Console.ReadLine());
+                int estadoprocesso = int.Parse(Console.ReadLine());
+                Console.Clear();
+                Console.Write("Valor do Processo: ");
+                double valorProcesso = double.Parse(Console.ReadLine());
+                Console.Clear();
+                Console.WriteLine("Data de Inicio: \n");
+                var dataInicio = NovaDataValida();
 
-                //var clienteEditado = new Cliente
-                //{
-                //    Nome = nomeEmpresa,
-                //    Cnpj = cnpjEmpresa,
-                //    EstadoClienteEnum = (EstadosEnum)estadoEmpresa,
-                //    Excluido = false,
-                //    ClienteId = clienteId
-                //};
-                //Console.Clear();
-                //clienteRepository.Editar(clienteEditado);
-                Console.WriteLine("Cliente Editado com sucesso, aperte enter para continuar");
+                var processoEditado = new Processo
+                {
+                    ClienteId = processo.ClienteId,
+                    NomeCliente = processo.NomeCliente,
+                    EstadoProcessoEnum = (EstadosEnum)estadoprocesso,
+                    NumeroProcesso = numeroProcesso,
+                    ProcessoId = ClienteRepository.contadorProcesso += 1,
+                    Status = StatusProcessoEnum.Ativo,
+                    DataInicio = dataInicio,
+                    Excluido = false,
+                    Valor = valorProcesso
+                };
+                Console.Clear();
+                processoRepository.Editar(processo);
+                Console.WriteLine("Processo Editado com sucesso, aperte enter para continuar");
                 Console.ReadLine();
             }
         }
         public static void ExcluirCliente()
         {
-            Console.Write("Digite o id do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
-            while (!(clienteRepository.VerificarClienteId(clienteId)))
+            Console.Write("Digite o id do Processo: ");
+            int processoId = int.Parse(Console.ReadLine());
+            while (!(processoRepository.VerificarProcessoId(processoId)))
             {
-                Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
-                clienteId = int.Parse(Console.ReadLine());
-            }
+                Console.Write("Processo não encontrado, digite novamente o Id do Processo: ");
+                processoId = int.Parse(Console.ReadLine());
+            };
 
-            var cliente = clienteRepository.RetornaPorId(clienteId);
+            var processo = processoRepository.RetornaPorId(processoId);
             Console.Clear();
 
-            Console.WriteLine("Deseja Realmente excluir esse cliente? (S/n)\n");
-            Console.WriteLine(cliente.ToString());
+            Console.WriteLine("Deseja Realmente excluir esse Processo? (S/n)\n");
+            Console.WriteLine(processo.ToString());
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
 
             if (opcaoUsuario == "S")
             {
-                clienteRepository.Excluir(clienteId);
-                Console.WriteLine("Cliente excluido com sucesso, aperte enter para continuar");
+                processoRepository.Excluir(processoId);
+                Console.WriteLine("Processo excluido com sucesso, aperte enter para continuar");
                 Console.ReadLine();
                 Console.Clear();
             }

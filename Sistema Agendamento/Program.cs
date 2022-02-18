@@ -162,7 +162,7 @@ namespace Sistema_Agendamento
 						}
 						break;
 					case "3":
-						ClienteService.EditarCliente();
+						ProcessoService.EditarProcesso();
 						Console.Clear();
 						break;
 					case "4":

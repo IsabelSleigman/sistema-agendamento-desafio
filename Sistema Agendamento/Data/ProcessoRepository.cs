@@ -97,5 +97,10 @@ namespace Sistema_Agendamento.Data
                 .Where(p => p.ProcessoId == processoId)
                 .FirstOrDefault();
         }
+        public bool VerificarProcessoId(int processoId)
+        {
+            return listaProcessos
+            .Any(p => p.ProcessoId == processoId && p.Excluido != true);
+        }
     }
 }
