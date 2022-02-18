@@ -1,4 +1,5 @@
 ﻿using Sistema_Agendamento.Entidades;
+using Sistema_Agendamento.Enum;
 using Sistema_Agendamento.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Sistema_Agendamento.Data
         private static List<Processo> listaProcessos = new List<Processo>();
         public void Editar(Processo processo)
         {
+            AtualizarProcessos();
+
             listaProcessos.ForEach(p =>
             {
                 if (p.ProcessoId == processo.ProcessoId)
@@ -31,6 +34,8 @@ namespace Sistema_Agendamento.Data
 
         public void Excluir(int processoId)
         {
+            AtualizarProcessos();
+
             listaProcessos.ForEach(p =>
             {
                 if (p.ProcessoId == processoId)
@@ -42,6 +47,8 @@ namespace Sistema_Agendamento.Data
         }
         public void MudarStatus(int processoId)
         {
+            AtualizarProcessos();
+
             listaProcessos.ForEach(p =>
             {
                 if (p.ProcessoId == processoId)
@@ -54,6 +61,8 @@ namespace Sistema_Agendamento.Data
 
         public void Criar(Processo processo)
         {
+            AtualizarProcessos();
+
             listaProcessos.Add(processo);
             _clienteRepository.InserirProcesso(processo);
         }
@@ -82,6 +91,8 @@ namespace Sistema_Agendamento.Data
 
         public List<Processo> ListarProcessosPorClienteId(int clienteId)
         {
+            AtualizarProcessos();
+
             var processos = listaProcessos
                .Where(c => c.ClienteId == clienteId)
                .ToList();
@@ -93,6 +104,8 @@ namespace Sistema_Agendamento.Data
 
         public Processo RetornaPorId(int processoId)
         {
+            AtualizarProcessos();
+
             return listaProcessos
                 .Where(p => p.ProcessoId == processoId)
                 .FirstOrDefault();
@@ -101,6 +114,15 @@ namespace Sistema_Agendamento.Data
         {
             return listaProcessos
             .Any(p => p.ProcessoId == processoId && p.Excluido != true);
+        }
+        public double CalcularSomaProcessosAtivos()
+        {
+            AtualizarProcessos();
+
+            return listaProcessos
+                .Where(p => p.Status == StatusProcessoEnum.Ativo)
+                .Select(p => p.Valor)
+                .Sum();
         }
     }
 }

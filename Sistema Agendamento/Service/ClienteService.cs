@@ -80,8 +80,8 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
 
-            Console.WriteLine("Deseja realmente editar esse cliente? (S/n)\n");
             Console.WriteLine(cliente.ToString());
+            Console.WriteLine("Deseja realmente editar esse cliente? (S/n)\n");
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
@@ -140,8 +140,8 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
 
-            Console.WriteLine("Deseja Realmente excluir esse cliente? (S/n)\n");
             Console.WriteLine(cliente.ToString());
+            Console.WriteLine("Deseja Realmente excluir esse cliente? (S/n)\n");
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();

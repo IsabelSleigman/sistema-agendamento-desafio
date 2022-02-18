@@ -134,6 +134,7 @@ namespace Sistema_Agendamento
 			Console.WriteLine("2- Criar Novo Processo");
 			Console.WriteLine("3- Editar Processo");
 			Console.WriteLine("4- Excluir Processo");
+			Console.WriteLine("5- Somar Processos");
 			Console.WriteLine("V- Voltar");
 			Console.WriteLine();
 
@@ -169,6 +170,10 @@ namespace Sistema_Agendamento
 						ProcessoService.ExcluirProcesso();
 						Console.Clear();
 						break;
+					case "5":
+						ProcessoService.SomaProcessosAtivos();
+						Console.Clear();
+						break;
 					default:
 						Console.Clear();
 						break;
@@ -184,6 +189,7 @@ namespace Sistema_Agendamento
 				Console.WriteLine("2- Criar Novo Processo");
 				Console.WriteLine("3- Editar Processo");
 				Console.WriteLine("4- Excluir Processo");
+				Console.WriteLine("5- Somar Processos");
 				Console.WriteLine("V- Voltar");
 				Console.WriteLine();
 

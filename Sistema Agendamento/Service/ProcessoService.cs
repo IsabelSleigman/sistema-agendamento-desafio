@@ -2,6 +2,7 @@
 using Sistema_Agendamento.Entidades;
 using Sistema_Agendamento.Enum;
 using System;
+using System.Linq;
 
 namespace Sistema_Agendamento.Service
 {
@@ -90,8 +91,8 @@ namespace Sistema_Agendamento.Service
                 Valor = valorProcesso
             };
 
-            Console.WriteLine("Processo criado, Deseja salvar processo? (S/n)\n");
             Console.WriteLine(processo.ToString());
+            Console.WriteLine("Processo criado, Deseja salvar processo? (S/n)\n");
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
@@ -126,8 +127,8 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
 
-            Console.WriteLine("Deseja realmente editar esse Processo? (S/n)\n");
             Console.WriteLine(processo.ToString());
+            Console.WriteLine("Deseja realmente editar esse Processo? (S/n)\n");
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
@@ -198,8 +199,8 @@ namespace Sistema_Agendamento.Service
 
             Console.Clear();
 
-            Console.WriteLine("Deseja Realmente excluir esse Processo? (S/n)\n");
             Console.WriteLine(processo.ToString());
+            Console.WriteLine("Deseja Realmente excluir esse Processo? (S/n)\n");
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
@@ -213,43 +214,77 @@ namespace Sistema_Agendamento.Service
                 Console.Clear();
             }
         }
+
+        public static void SomaProcessosAtivos()
+        {
+            var total = processoRepository.CalcularSomaProcessosAtivos();
+
+            Console.WriteLine("A soma total dos processo ativos é: \n");
+            Console.Write("R$ " + total);
+            Console.WriteLine("\n\nAperte enter para voltar ao menu");
+            Console.ReadLine();
+
+        }
         private static DateTime NovaDataValida()
         {
             Console.Write("Digite o dia: ");
+
             var dia = int.Parse(Console.ReadLine());
+
             Console.WriteLine("");
+
             while (dia < 1 || dia > 31)
             {
                 Console.Clear();
+
                 Console.WriteLine("Dia Invalido: \n");
+
                 Console.Write("Digite o dia: ");
+
                 dia = int.Parse(Console.ReadLine());
 
-            }
+            };
+
             Console.Write("Digite o mês: ");
+
             var mes = int.Parse(Console.ReadLine());
+
             Console.WriteLine("");
+
             while (mes < 1 || mes > 12)
             {
                 Console.Clear();
+
                 Console.WriteLine("Mês Invalido: \n");
+
                 Console.Write("Digite o Mês: ");
+
                 mes = int.Parse(Console.ReadLine());
 
-            }
+            };
+
             Console.WriteLine("Digite o ano: ");
+
             var ano = int.Parse(Console.ReadLine());
+
             Console.WriteLine("");
+
             DateTime dataDeHoje = DateTime.Now;
+
             while (ano < 1 || ano > dataDeHoje.Year)
             {
                 Console.Clear();
+
                 Console.WriteLine("Ano Invalido: \n");
+
                 Console.Write("Digite o Ano: ");
+
                 ano = int.Parse(Console.ReadLine());
 
-            }
-             var dataValida = new DateTime(dia, mes, ano);
+            };
+
+            DateTime dataValida = new DateTime(dia, mes, ano);
+
             return dataValida;
         }
     }
