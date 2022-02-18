@@ -220,9 +220,133 @@ namespace Sistema_Agendamento.Service
             var total = processoRepository.CalcularSomaProcessosAtivos();
 
             Console.WriteLine("A soma total dos processo ativos é: \n");
+
             Console.Write("R$ " + total);
+
             Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
             Console.ReadLine();
+
+        }
+
+        public static void CalcularMediaPorEstado()
+        {
+            Console.Write("\nDigite o id do Cliente que deseja calcular: ");
+
+            int clienteId = int.Parse(Console.ReadLine());
+
+            while (!(clienteRepository.VerificarClienteId(clienteId)))
+            {
+                Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
+
+                clienteId = int.Parse(Console.ReadLine());
+            };
+
+            var cliente = clienteRepository.RetornaPorId(clienteId);
+
+            Console.Clear();
+
+            foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
+            {
+                Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
+            };
+
+            Console.Write("Digite o estado entre as opções acima que deseja calcular: ");
+
+            int estadoprocesso = int.Parse(Console.ReadLine());
+
+            Console.Clear();
+
+            var total = processoRepository.CalcularMediaPorEstado((Enum.EstadosEnum)estadoprocesso, cliente.ClienteId);
+
+            if(total == 0)
+            {
+                Console.WriteLine(cliente.ToString());
+
+                Console.WriteLine($"Não possuiu processos no estado de {(Enum.EstadosEnum)estadoprocesso}! \n");
+
+                Console.WriteLine("Aperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine(cliente.ToString());
+
+                Console.WriteLine($"A Media total do estado de {(Enum.EstadosEnum)estadoprocesso} é : \n");
+
+                Console.Write("R$ " + total);
+
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+
+        }
+        public static void ListarProcessoMesAno()
+        {
+            Console.Write("Digite o mês: ");
+
+            var mes = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("");
+
+            while (mes < 1 || mes > 12)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Mês Invalido: \n");
+
+                Console.Write("Digite o Mês: ");
+
+                mes = int.Parse(Console.ReadLine());
+
+            };
+
+            Console.WriteLine("Digite o ano: ");
+
+            var ano = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("");
+
+            DateTime dataDeHoje = DateTime.Now;
+
+            while (ano < 1 || ano > dataDeHoje.Year)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Ano Invalido: \n");
+
+                Console.Write("Digite o Ano: ");
+
+                ano = int.Parse(Console.ReadLine());
+
+            };
+
+            Console.Clear();
+
+            var numeroProcessos = processoRepository.ListarProcessosMesAno(mes, ano);
+
+            if(numeroProcessos.Count > 0)
+            {
+                foreach (var item in numeroProcessos)
+                {
+                    Console.WriteLine("Processos");
+                    Console.WriteLine("");
+                    Console.Write($" / Número - {item} - / ");
+                }
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Nenhum Processo encontrado!");
+
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
 
         }
         private static DateTime NovaDataValida()

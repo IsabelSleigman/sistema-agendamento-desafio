@@ -82,7 +82,7 @@ namespace Sistema_Agendamento.Data
 
             foreach (var processo in processos)
             {
-               if (listaProcessos.Count() == 0 || listaProcessos.Any(p => p.ProcessoId != processo.ProcessoId))
+               if (listaProcessos.Count() == 0 || !(listaProcessos.Any(p => p.ProcessoId == processo.ProcessoId)))
                {
                   listaProcessos.Add(processo);
                }
@@ -123,6 +123,40 @@ namespace Sistema_Agendamento.Data
                 .Where(p => p.Status == StatusProcessoEnum.Ativo)
                 .Select(p => p.Valor)
                 .Sum();
+        }
+
+        public double CalcularMediaPorEstado(EstadosEnum estado, int clienteId)
+        {
+            AtualizarProcessos();
+
+            var processosEstadoEspecifico = listaProcessos
+                .Where(p => p.ClienteId == clienteId && p.EstadoProcessoEnum == estado)
+                .Select(p => p.Valor)
+                .ToList();
+
+            if(processosEstadoEspecifico.Count > 0)
+            {
+                var quantidadeProcessos = processosEstadoEspecifico.Count();
+
+                var valorTotal = processosEstadoEspecifico.Sum();
+
+                var media = valorTotal / quantidadeProcessos;
+
+                return media;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public List<string> ListarProcessosMesAno(int mes, int ano)
+        {
+            AtualizarProcessos();
+
+            return listaProcessos
+                .Where(p => p.DataInicio.Year == ano && p.DataInicio.Month == mes)
+                .Select(p => p.NumeroProcesso)
+                .ToList();
         }
     }
 }

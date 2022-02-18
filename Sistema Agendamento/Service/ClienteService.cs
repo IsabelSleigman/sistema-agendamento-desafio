@@ -297,7 +297,7 @@ namespace Sistema_Agendamento.Service
                 {
                     ClienteId = clienteB.ClienteId,
                     NomeCliente = clienteB.Nome,
-                    DataInicio = new DateTime(2007, 10, 15),
+                    DataInicio = new DateTime(2007, 09, 15),
                     EstadoProcessoEnum = Enum.EstadosEnum.Amazonas,
                     Excluido = false,
                     NumeroProcesso = "000010TRABAM",
