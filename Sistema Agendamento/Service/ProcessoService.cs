@@ -146,7 +146,7 @@ namespace Sistema_Agendamento.Service
                 Console.ReadLine();
             }
         }
-        public static void ExcluirCliente()
+        public static void ExcluirProcesso()
         {
             Console.Write("Digite o id do Processo: ");
             int processoId = int.Parse(Console.ReadLine());

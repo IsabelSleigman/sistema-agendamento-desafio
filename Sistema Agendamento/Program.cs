@@ -166,7 +166,7 @@ namespace Sistema_Agendamento
 						Console.Clear();
 						break;
 					case "4":
-						ClienteService.ExcluirCliente();
+						ProcessoService.ExcluirProcesso();
 						Console.Clear();
 						break;
 					default:
