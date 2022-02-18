@@ -31,36 +31,51 @@ namespace Sistema_Agendamento.Service
         }
         public static void NovoProcesso()
         {
-            System.Console.WriteLine();
-            Console.WriteLine("Novo Processo");
+            Console.WriteLine("\nNovo Processo\n");
 
-            Console.WriteLine();
             Console.Write("Digite o id do Cliente: ");
+
             int clienteId = int.Parse(Console.ReadLine());
+
             while (!(clienteRepository.VerificarClienteId(clienteId)))
             {
                 Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
+
                 clienteId = int.Parse(Console.ReadLine());
             }
+
             var cliente = clienteRepository.RetornaPorId(clienteId);
+
             Console.Clear();
-            Console.Write("Número do Processo: ");
+
+            Console.WriteLine("Cliente: " + cliente.ToString());
+
+            Console.Write("\nNúmero do Processo: ");
+
             string numeroProcesso = Console.ReadLine();
+
             Console.Clear();
+
             foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
             {
                 Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
             }
+
             Console.Write("Digite o estado entre as opções acima: ");
+
             int estadoProcesso = int.Parse(Console.ReadLine());
+
             Console.Clear();
+
             Console.Write("Valor do Processo: ");
+
             double valorProcesso = double.Parse(Console.ReadLine());
+
             Console.Clear();
+
             Console.WriteLine("Data de Inicio: \n");
+
             var dataInicio = NovaDataValida();
-
-
 
             var processo = new Processo
             {
@@ -80,28 +95,35 @@ namespace Sistema_Agendamento.Service
             Console.WriteLine();
 
             var opcaoUsuario = Console.ReadLine().ToUpper();
+
             Console.Clear();
+
             if (opcaoUsuario == "S")
             {
                 processoRepository.Criar(processo);
+
                 Console.Write("Processo salvo com sucesso, aperte enter para continuar");
                 Console.ReadLine();
+                Console.Clear();
             }
 
             Console.Clear();
         }
         public static void EditarProcesso()
         {
-            Console.WriteLine();
-            Console.Write("Digite o id do Processo: ");
+            Console.Write("\nDigite o id do Processo: ");
+
             int processoId = int.Parse(Console.ReadLine());
+
             while (!(processoRepository.VerificarProcessoId(processoId)))
             {
                 Console.Write("Processo não encontrado, digite novamente o Id do Processo: ");
+
                 processoId = int.Parse(Console.ReadLine());
             };
 
             var processo = processoRepository.RetornaPorId(processoId);
+
             Console.Clear();
 
             Console.WriteLine("Deseja realmente editar esse Processo? (S/n)\n");
@@ -113,19 +135,28 @@ namespace Sistema_Agendamento.Service
             if (opcaoUsuario == "S")
             {
                 Console.Write("Digite o número do processo: ");
+
                 string numeroProcesso = Console.ReadLine();
            
                 foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
                 {
                     Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
                 };
+
                 Console.Write("Digite o estado entre as opções acima: ");
+
                 int estadoprocesso = int.Parse(Console.ReadLine());
+
                 Console.Clear();
+
                 Console.Write("Valor do Processo: ");
+
                 double valorProcesso = double.Parse(Console.ReadLine());
+
                 Console.Clear();
+
                 Console.WriteLine("Data de Inicio: \n");
+
                 var dataInicio = NovaDataValida();
 
                 var processoEditado = new Processo
@@ -140,23 +171,31 @@ namespace Sistema_Agendamento.Service
                     Excluido = false,
                     Valor = valorProcesso
                 };
+
                 Console.Clear();
-                processoRepository.Editar(processo);
+
+                processoRepository.Editar(processoEditado);
+
                 Console.WriteLine("Processo Editado com sucesso, aperte enter para continuar");
                 Console.ReadLine();
+                Console.Clear();
             }
         }
         public static void ExcluirProcesso()
         {
-            Console.Write("Digite o id do Processo: ");
+            Console.Write("\nDigite o id do Processo: ");
+
             int processoId = int.Parse(Console.ReadLine());
+
             while (!(processoRepository.VerificarProcessoId(processoId)))
             {
                 Console.Write("Processo não encontrado, digite novamente o Id do Processo: ");
+
                 processoId = int.Parse(Console.ReadLine());
             };
 
             var processo = processoRepository.RetornaPorId(processoId);
+
             Console.Clear();
 
             Console.WriteLine("Deseja Realmente excluir esse Processo? (S/n)\n");
@@ -168,6 +207,7 @@ namespace Sistema_Agendamento.Service
             if (opcaoUsuario == "S")
             {
                 processoRepository.Excluir(processoId);
+
                 Console.WriteLine("Processo excluido com sucesso, aperte enter para continuar");
                 Console.ReadLine();
                 Console.Clear();

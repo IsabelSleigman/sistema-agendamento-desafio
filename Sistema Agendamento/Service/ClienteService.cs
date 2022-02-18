@@ -13,8 +13,7 @@ namespace Sistema_Agendamento.Service
 
         public static void Listar()
         {
-            Console.WriteLine();
-            Console.WriteLine("Clientes\n");
+            Console.WriteLine("\nClientes\n");
 
             var lista = clienteRepository.Listar();
 
@@ -32,20 +31,23 @@ namespace Sistema_Agendamento.Service
         }
         public static void CadastrarCliente()
         {
-            System.Console.WriteLine();
-            Console.WriteLine("Cadastrar Cliente");
+            Console.WriteLine("\nCadastrar Cliente\n");
 
             Console.Write("Digite o nome da Empresa: ");
+
             string nomeEmpresa = Console.ReadLine();
 
             Console.Write("Digite o CNPJ: ");
+
             string cnpjEmpresa = Console.ReadLine();
 
             foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
             {
                 Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
-            }
+            };
+
             Console.Write("Digite o estado entre as opções acima: ");
+
             int estadoEmpresa = int.Parse(Console.ReadLine());
 
             var novoCliente = new Cliente
@@ -58,19 +60,24 @@ namespace Sistema_Agendamento.Service
             };
 
             clienteRepository.Criar(novoCliente);
+
             Console.Clear();
         }
         public static void EditarCliente()
         {
-            System.Console.WriteLine();
-            Console.Write("Digite o id do Cliente: ");
+            Console.Write("\nDigite o id do Cliente: ");
+
             int clienteId = int.Parse(Console.ReadLine());
+
             while (!(clienteRepository.VerificarClienteId(clienteId)))
             {
                 Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
+
                 clienteId = int.Parse(Console.ReadLine());
-            }
+            };
+
             var cliente = clienteRepository.RetornaPorId(clienteId);
+
             Console.Clear();
 
             Console.WriteLine("Deseja realmente editar esse cliente? (S/n)\n");
@@ -82,16 +89,20 @@ namespace Sistema_Agendamento.Service
             if (opcaoUsuario == "S")
             {
                 Console.Write("Digite o nome da Empresa: ");
+
                 string nomeEmpresa = Console.ReadLine();
 
                 Console.Write("Digite o CNPJ: ");
+
                 string cnpjEmpresa = Console.ReadLine();
 
                 foreach (int i in EstadosEnum.GetValues(typeof(EstadosEnum)))
                 {
                     Console.WriteLine("{0}-{1}", i, EstadosEnum.GetName(typeof(EstadosEnum), i));
-                }
+                };
+
                 Console.Write("Digite o estado entre as opções acima: ");
+
                 int estadoEmpresa = int.Parse(Console.ReadLine());
 
                 var clienteEditado = new Cliente
@@ -102,23 +113,31 @@ namespace Sistema_Agendamento.Service
                     Excluido = false,
                     ClienteId = clienteId
                 };
+
                 Console.Clear();
+
                 clienteRepository.Editar(clienteEditado);
+
                 Console.WriteLine("Cliente Editado com sucesso, aperte enter para continuar");
                 Console.ReadLine();
+                Console.Clear();
             }
         }
         public static void ExcluirCliente()
         {
-            Console.Write("Digite o id do Cliente: ");
+            Console.Write("\nDigite o id do Cliente: ");
+
             int clienteId = int.Parse(Console.ReadLine());
+
             while (!(clienteRepository.VerificarClienteId(clienteId)))
             {
                 Console.Write("Cliente não  encontrado, digite novamente o id do Cliente: ");
+
                 clienteId = int.Parse(Console.ReadLine());
             }
 
             var cliente = clienteRepository.RetornaPorId(clienteId);
+
             Console.Clear();
 
             Console.WriteLine("Deseja Realmente excluir esse cliente? (S/n)\n");
@@ -130,6 +149,7 @@ namespace Sistema_Agendamento.Service
             if (opcaoUsuario == "S")
             {
                 clienteRepository.Excluir(clienteId);
+
                 Console.WriteLine("Cliente excluido com sucesso, aperte enter para continuar");
                 Console.ReadLine();
                 Console.Clear();
