@@ -329,11 +329,13 @@ namespace Sistema_Agendamento.Service
 
             if(numeroProcessos.Count > 0)
             {
+                Console.WriteLine("Processos");
+
                 foreach (var item in numeroProcessos)
                 {
-                    Console.WriteLine("Processos");
                     Console.WriteLine("");
                     Console.Write($" / Número - {item} - / ");
+                    Console.WriteLine("");
                 }
                 Console.WriteLine("\n\nAperte enter para voltar ao menu");
 
@@ -362,6 +364,34 @@ namespace Sistema_Agendamento.Service
                     Console.WriteLine($"Número Processo: {item.NumeroProcesso}");
                 }
 
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Nenhum Processo encontrado!");
+
+                Console.WriteLine("\n\nAperte enter para voltar ao menu");
+
+                Console.ReadLine();
+            }
+
+        }
+        public static void ListarProcessoSiglaTrab()
+        {
+            var processos = processoRepository.ListarSiglaTrab();
+
+            if (processos.Count > 0)
+            {
+                Console.WriteLine("Processos");
+
+                foreach (var item in processos)
+                {              
+                    Console.WriteLine("");
+                    Console.Write($" / Número - {item} - / ");
+                    Console.WriteLine("");
+                }
                 Console.WriteLine("\n\nAperte enter para voltar ao menu");
 
                 Console.ReadLine();

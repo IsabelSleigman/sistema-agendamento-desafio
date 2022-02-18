@@ -177,5 +177,15 @@ namespace Sistema_Agendamento.Data
 
             return listaProcesso;
         }
+
+        public List<string> ListarSiglaTrab()
+        {
+            AtualizarProcessos();
+
+            return listaProcessos
+                .Where(p => p.NumeroProcesso.Contains("TRAB"))
+                .Select(p => p.NumeroProcesso)
+                .ToList();
+        }
     }
 }

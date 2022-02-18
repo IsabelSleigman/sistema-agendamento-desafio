@@ -21,12 +21,12 @@ namespace Sistema_Agendamento
 				Console.WriteLine();
 				Console.WriteLine("Sistema de Agendamento");
 				Console.WriteLine();
-				Console.WriteLine("Informe a opção desejada:");
+				Console.WriteLine("Informe a opção desejada:\n");
 
 				Console.WriteLine("1- Clientes");
 				Console.WriteLine("2- Processos");
 				Console.WriteLine("X- Sair");
-				Console.WriteLine();
+				Console.WriteLine("");
 
 				opcaoUsuario = Console.ReadLine().ToUpper();
 
@@ -57,14 +57,14 @@ namespace Sistema_Agendamento
 			Console.WriteLine();
 			Console.WriteLine("Area Cliente");
 			Console.WriteLine();
-			Console.WriteLine("Informe a opção desejada:");
+			Console.WriteLine("Informe a opção desejada:\n");
 
 			Console.WriteLine("1- Listar Clientes");
 			Console.WriteLine("2- Criar Novo Cliente");
 			Console.WriteLine("3- Editar Cliente");
 			Console.WriteLine("4- Excluir Cliente");
 			Console.WriteLine("V- Voltar");
-			Console.WriteLine();
+			Console.WriteLine("");
 
 			string opcaoUsuario = Console.ReadLine().ToUpper();
 			Console.WriteLine();
@@ -106,14 +106,14 @@ namespace Sistema_Agendamento
 				Console.WriteLine();
 				Console.WriteLine("Area Cliente");
 				Console.WriteLine();
-				Console.WriteLine("Informe a opção desejada:");
+				Console.WriteLine("Informe a opção desejada:\n");
 
 				Console.WriteLine("1- Listar Clientes");
 				Console.WriteLine("2- Criar Novo Cliente");
 				Console.WriteLine("3- Editar Cliente");
 				Console.WriteLine("4- Excluir Cliente");
 				Console.WriteLine("V- Voltar");
-				Console.WriteLine();
+				Console.WriteLine("");
 
 				opcaoUsuario = Console.ReadLine().ToUpper();
 				Console.WriteLine();
@@ -128,7 +128,7 @@ namespace Sistema_Agendamento
 			Console.WriteLine();
 			Console.WriteLine("Processos");
 			Console.WriteLine();
-			Console.WriteLine("Informe a opção desejada:");
+			Console.WriteLine("Informe a opção desejada:\n");
 
 			Console.WriteLine("1- Listar Processos");
 			Console.WriteLine("2- Criar Novo Processo");
@@ -136,10 +136,11 @@ namespace Sistema_Agendamento
 			Console.WriteLine("4- Excluir Processo");
 			Console.WriteLine("5- Somar Processos");
 			Console.WriteLine("6- Calcular Média por Estado");
-			Console.WriteLine("7- Listar Processos por Data ");
-			Console.WriteLine("8- Listar Processos por Estado ");
+			Console.WriteLine("7- Listar Processos Data ");
+			Console.WriteLine("8- Listar Processos Estado ");
+			Console.WriteLine("9- Listar Processos TRAB ");
 			Console.WriteLine("V- Voltar");
-			Console.WriteLine();
+			Console.WriteLine("");
 
 			string opcaoUsuario = Console.ReadLine().ToUpper();
 			Console.WriteLine();
@@ -181,12 +182,16 @@ namespace Sistema_Agendamento
 						ProcessoService.CalcularMediaPorEstado();
 						Console.Clear();
 						break;
+					case "7":
+						ProcessoService.ListarProcessoMesAno();
+						Console.Clear();
+						break;
 					case "8":
 						ProcessoService.ListarProcessoEstadoCliente();
 						Console.Clear();
 						break;
-					case "7":
-						ProcessoService.ListarProcessoMesAno();
+					case "9":
+						ProcessoService.ListarProcessoSiglaTrab();
 						Console.Clear();
 						break;
 					default:
@@ -198,7 +203,7 @@ namespace Sistema_Agendamento
 				Console.WriteLine();
 				Console.WriteLine("Processos");
 				Console.WriteLine();
-				Console.WriteLine("Informe a opção desejada:");
+				Console.WriteLine("Informe a opção desejada:\n");
 
 				Console.WriteLine("1- Listar Processos");
 				Console.WriteLine("2- Criar Novo Processo");
@@ -206,10 +211,11 @@ namespace Sistema_Agendamento
 				Console.WriteLine("4- Excluir Processo");
 				Console.WriteLine("5- Somar Processos");
 				Console.WriteLine("6- Calcular Média por Estados");
-				Console.WriteLine("7- Listar Processos por Data ");
-				Console.WriteLine("8- Listar Processos por Estado ");
+				Console.WriteLine("7- Listar Processos Data ");
+				Console.WriteLine("8- Listar Processos Estado ");
+				Console.WriteLine("9- Listar Processos TRAB ");
 				Console.WriteLine("V- Voltar");
-				Console.WriteLine();
+				Console.WriteLine("");
 
 				opcaoUsuario = Console.ReadLine().ToUpper();
 				Console.WriteLine();
